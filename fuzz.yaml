@@ -1,0 +1,38 @@
+base: ubuntu:16.04
+language: go
+version: "1.11"
+checkout: github.com/coredns/coredns
+setup:
+  - sudo apt-get install -y make
+  - make godeps
+targets:
+  - name: plugin-cache
+    harness:
+      function: Fuzz
+      build_tags: fuzz
+      package: github.com/coredns/coredns/plugin/cache
+  - name: plugin-chaos
+    harness:
+      function: Fuzz
+      build_tags: fuzz
+      package: github.com/coredns/coredns/plugin/chaos
+  - name: plugin-whoami
+    harness:
+      function: Fuzz
+      build_tags: fuzz
+      package: github.com/coredns/coredns/plugin/whoami
+  - name: plugin-file
+    harness:
+      function: Fuzz
+      build_tags: fuzz
+      package: github.com/coredns/coredns/plugin/file
+  - name: plugin-proxy
+    harness:
+      function: Fuzz
+      build_tags: fuzz
+      package: github.com/coredns/coredns/plugin/proxy
+  - name: plugin-rewrite
+    harness:
+      function: Fuzz
+      build_tags: fuzz
+      package: github.com/coredns/coredns/plugin/rewrite
